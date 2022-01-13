@@ -140,5 +140,5 @@ Destroy complete! Resources: 1 destroyed.
 ```
 
 ## Reference Documentation
-- [Random provider] (https://registry.terraform.io/providers/hashicorp/random/latest/docs)
-- [Resources for the random_pet provider] (https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet)
+- [Random provider](https://registry.terraform.io/providers/hashicorp/random/latest/docs)
+- [Resources for the random_pet provider](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet)
