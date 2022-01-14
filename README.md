@@ -73,7 +73,7 @@ Terraform will perform the following actions:
 Plan: 1 to add, 0 to change, 0 to destroy.
 
 Changes to Outputs:
-  + server = 3
+  + server = (known after apply)
 
 Do you want to perform these actions?
   Terraform will perform the actions described above.
@@ -82,13 +82,13 @@ Do you want to perform these actions?
   Enter a value: yes
 
 random_pet.server: Creating...
-random_pet.server: Creation complete after 0s [id=sadly-working-frog]
+random_pet.server: Creation complete after 0s [id=lovely-holy-coral]
 
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-server = 3
+server = "lovely-holy-coral"
 ```
 
 - To confirm the resources that have been created
@@ -108,7 +108,7 @@ terraform destroy
 
 This is how it is supposed to look after destroying the changes:
 ```shell
-random_pet.server: Refreshing state... [id=sadly-working-frog]
+random_pet.server: Refreshing state... [id=lovely-holy-coral]
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   - destroy
@@ -117,7 +117,7 @@ Terraform will perform the following actions:
 
   # random_pet.server will be destroyed
   - resource "random_pet" "server" {
-      - id        = "sadly-working-frog" -> null
+      - id        = "lovely-holy-coral" -> null
       - length    = 3 -> null
       - separator = "-" -> null
     }
@@ -125,7 +125,7 @@ Terraform will perform the following actions:
 Plan: 0 to add, 0 to change, 1 to destroy.
 
 Changes to Outputs:
-  - server = 3 -> null
+  - server = "lovely-holy-coral" -> null
 
 Do you really want to destroy all resources?
   Terraform will destroy all your managed infrastructure, as shown above.
@@ -133,7 +133,7 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-random_pet.server: Destroying... [id=sadly-working-frog]
+random_pet.server: Destroying... [id=lovely-holy-coral]
 random_pet.server: Destruction complete after 0s
 
 Destroy complete! Resources: 1 destroyed.
