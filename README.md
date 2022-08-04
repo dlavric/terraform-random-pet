@@ -1,5 +1,5 @@
 # Repository for learning Terraform
-This repository has been created for learning the `random` provider for Terraform OSS and using the `random_pet` resource
+This repository has been created for learning how to use the data source `terraform_remote_state` to get the state from another workspace inside the same organization on TFC
 
 ## This Repository creates a Random provider with Terraform
 
@@ -21,6 +21,16 @@ git clone git@github.com:dlavric/terraform-random-pet.git
 cd terraform-random-pet
 ```
 
+- Go to the branch `remote-state`
+```shell
+git checkout remote-state
+```
+
+- Login into TFC
+```shell
+terraform login
+```
+
 - Run `terraform init`, to download any external dependency
 ```shell
 terraform init
@@ -30,15 +40,11 @@ This is the output of initializing the Terraform code:
 ```shell
 Initializing the backend...
 
-Initializing provider plugins...
-- Finding latest version of hashicorp/random...
-- Installing hashicorp/random v3.1.0...
-- Installed hashicorp/random v3.1.0 (signed by HashiCorp)
+Successfully configured the backend "remote"! Terraform will automatically
+use this backend unless the backend configuration changes.
 
-Terraform has created a lock file .terraform.lock.hcl to record the provider
-selections it made above. Include this file in your version control repository
-so that Terraform can guarantee to make the same selections by default when
-you run "terraform init" in the future.
+Initializing provider plugins...
+- terraform.io/builtin/terraform is built in to Terraform
 
 Terraform has been successfully initialized!
 
@@ -58,37 +64,49 @@ terraform apply
 
 This is the output for applying the changes:
 ```shell
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-  + create
+Running apply in the remote backend. Output will stream here. Pressing Ctrl-C
+will cancel the remote apply if it's still pending. If the apply started it
+will stop streaming the logs, but will not stop the apply running remotely.
 
-Terraform will perform the following actions:
+Preparing the remote apply...
 
-  # random_pet.server will be created
-  + resource "random_pet" "server" {
-      + id        = (known after apply)
-      + length    = 3
-      + separator = "-"
-    }
+To view this run in a browser, visit:
+https://app.terraform.io/app/daniela-org/remote-random-pet/runs/run-2ndJXhBPXEyJfSRz
 
-Plan: 1 to add, 0 to change, 0 to destroy.
+Waiting for the plan to start...
+
+Terraform v1.2.6
+on linux_amd64
+Initializing plugins and modules...
+data.terraform_remote_state.random-pet: Reading...
+data.terraform_remote_state.random-pet: Read complete after 0s
 
 Changes to Outputs:
-  + server = (known after apply)
+  + from_other = "solely-select-dolphin"
 
-Do you want to perform these actions?
+You can apply this plan to save these new output values to the Terraform
+state, without changing any real infrastructure.
+
+------------------------------------------------------------------------
+
+Cost estimation:
+
+Resources: 0 of 0 estimated
+           $0.0/mo +$0.0
+
+------------------------------------------------------------------------
+
+Do you want to perform these actions in workspace "remote-random-pet"?
   Terraform will perform the actions described above.
   Only 'yes' will be accepted to approve.
 
   Enter a value: yes
 
-random_pet.server: Creating...
-random_pet.server: Creation complete after 0s [id=lovely-holy-coral]
-
-Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-server = "lovely-holy-coral"
+from_other = "solely-select-dolphin"
 ```
 
 - To confirm the resources that have been created
@@ -106,39 +124,7 @@ random_pet.server
 terraform destroy
 ```
 
-This is how it is supposed to look after destroying the changes:
-```shell
-random_pet.server: Refreshing state... [id=lovely-holy-coral]
-
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-  - destroy
-
-Terraform will perform the following actions:
-
-  # random_pet.server will be destroyed
-  - resource "random_pet" "server" {
-      - id        = "lovely-holy-coral" -> null
-      - length    = 3 -> null
-      - separator = "-" -> null
-    }
-
-Plan: 0 to add, 0 to change, 1 to destroy.
-
-Changes to Outputs:
-  - server = "lovely-holy-coral" -> null
-
-Do you really want to destroy all resources?
-  Terraform will destroy all your managed infrastructure, as shown above.
-  There is no undo. Only 'yes' will be accepted to confirm.
-
-  Enter a value: yes
-
-random_pet.server: Destroying... [id=lovely-holy-coral]
-random_pet.server: Destruction complete after 0s
-
-Destroy complete! Resources: 1 destroyed.
-```
 
 ## Reference Documentation
-- [Random provider](https://registry.terraform.io/providers/hashicorp/random/latest/docs)
-- [Resources for the random_pet provider](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet)
+- [Terraform Remote State](https://www.terraform.io/language/state/remote-state-data)
+- [Accessing states from other workspaces](https://www.terraform.io/cloud-docs/workspaces/state#accessing-state-from-other-workspaces)
