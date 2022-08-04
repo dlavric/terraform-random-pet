@@ -109,20 +109,6 @@ Outputs:
 from_other = "solely-select-dolphin"
 ```
 
-- To confirm the resources that have been created
-```shell
-terraform state list
-```
-
-Output is:
-```shell
-random_pet.server
-```
-
-- Destroy the instance
-```shell
-terraform destroy
-```
 
 
 ## Reference Documentation
