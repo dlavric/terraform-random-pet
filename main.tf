@@ -13,8 +13,8 @@ output "server" {
 
 terraform {
   backend "remote" {
-    hostname = "192.168.56.33.nip.io"
-    organization = "skills-map"
+    hostname = "app.terraform.io"
+    organization = "daniela-org"
 
     workspaces {
       name = "random-pet"
