@@ -7,7 +7,8 @@ provider "time" {
 }
 
 resource "random_pet" "server" {
-  length = 3
+  length     = 3
+  depends_on = [time_sleep.wait_30_seconds]
 
 }
 
